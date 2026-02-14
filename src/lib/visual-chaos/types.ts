@@ -105,8 +105,13 @@ export function generateVisualChaosEvents(currentScore: number): VisualChaosEven
     const index = Math.floor(Math.random() * availableEvents.length);
     const type = availableEvents.splice(index, 1)[0];
 
-    // Shorter duration
-    const durationMs = 500 + Math.random() * 1000; // 0.5-1.5 seconds
+    // Duration logic
+    let durationMs = 500 + Math.random() * 1000; // Default: 0.5-1.5 seconds
+
+    // Short duration for distraction effects (Shake, Blur)
+    if (type === VisualChaosEvent.screenShake || type === VisualChaosEvent.blur) {
+      durationMs = 200 + Math.random() * 300; // 0.2-0.5 seconds (Very Short)
+    }
 
     events.push({
       type,
