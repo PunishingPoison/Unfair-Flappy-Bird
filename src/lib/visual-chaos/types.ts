@@ -50,7 +50,7 @@ export const VISUAL_CHAOS_CONFIG = {
   lowChanceMultiplier: 0.5, // 50% chance below threshold
 
   // Effect-specific settings - BALANCED
-  screenOffsetRange: { min: 20, max: 80 },
+  screenOffsetRange: { min: 10, max: 25 }, // Max ~10% of screen width (288px)
   glitchSliceHeight: { min: 2, max: 20 },
   staticNoiseDensity: 0.2,
   flickerFrequency: 10, // Slower flicker
