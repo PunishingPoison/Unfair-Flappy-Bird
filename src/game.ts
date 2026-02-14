@@ -120,15 +120,6 @@ export default class Game extends ParentClass {
     // Update visual chaos system
     this.visualChaos.update();
 
-    // EXTREME: Constant visual chaos during gameplay - EVERY FRAME
-    if (this.state === 'game') {
-      const { generateVisualChaosEvents } = require('./lib/visual-chaos/types');
-      // Add MASSIVE batches of visual chaos every frame for MAXIMUM effect
-      for (let i = 0; i < 5; i++) {
-        const events = generateVisualChaosEvents(0);
-        this.visualChaos.addEvents(events);
-      }
-    }
   }
 
   public Display(): void {

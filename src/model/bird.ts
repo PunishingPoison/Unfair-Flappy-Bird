@@ -162,8 +162,8 @@ export default class Bird extends ParentClass {
 
     // Handle input lag chaos - randomly eats inputs
     if (this.activeChaosEvents.includes(ChaosEvent.inputLag)) {
-      if (Math.random() < 0.35) {
-        // 35% chance to completely ignore the flap - MORE FREQUENT
+      if (Math.random() < 0.05) {
+        // 5% chance to completely ignore the flap - REDUCED
         return; // Input eaten!
       }
     }
@@ -297,7 +297,7 @@ export default class Bird extends ParentClass {
 
         // Only the first pipe should be checked
         break;
-      } catch (err) {}
+      } catch (err) { }
     }
 
     return (this.flags & Bird.FLAG_IS_ALIVE) === 0;
@@ -368,14 +368,14 @@ export default class Bird extends ParentClass {
       }
     }
 
-    // Handle sudden drop chaos - ABSOLUTE MAXIMUM
+    // Handle sudden drop chaos - REDUCED
     if (this.suddenDropCooldown > 0) {
       this.suddenDropCooldown -= dt;
     }
-    if (this.activeChaosEvents.includes(ChaosEvent.suddenDrop) && this.suddenDropCooldown <= 0 && Math.random() < 0.15) {
-      // 15% chance per frame - EXTREMELY FREQUENT
-      this.velocity.y += this.canvasSize.height * 0.8; // VERY STRONG downward spike
-      this.suddenDropCooldown = 0.5; // 0.5 second cooldown - VERY frequent
+    if (this.activeChaosEvents.includes(ChaosEvent.suddenDrop) && this.suddenDropCooldown <= 0 && Math.random() < 0.005) {
+      // 0.5% chance per frame - RARE
+      this.velocity.y += this.canvasSize.height * 0.3; // REDUCED downward spike
+      this.suddenDropCooldown = 2.0; // 2.0 second cooldown - LESS frequent
     }
 
     // Handle air burst chaos - ABSOLUTE MAXIMUM
@@ -395,9 +395,9 @@ export default class Bird extends ParentClass {
 
     // Handle gravity shift chaos - randomly changes gravity strength
     if (this.activeChaosEvents.includes(ChaosEvent.gravityShift)) {
-      if (Math.random() < 0.08) {
-        // 8% chance per frame to change gravity - VERY FREQUENT
-        this.gravityMultiplier = 0.3 + Math.random() * 2.0; // 0.3x to 2.3x gravity - MORE EXTREME
+      if (Math.random() < 0.02) {
+        // 2% chance per frame to change gravity - OCCASIONAL
+        this.gravityMultiplier = 0.8 + Math.random() * 0.4; // 0.8x to 1.2x gravity - MANAGEABLE
       }
     } else {
       this.gravityMultiplier = 1.0;
@@ -405,10 +405,10 @@ export default class Bird extends ParentClass {
 
     // Handle wind gust chaos - horizontal force
     if (this.activeChaosEvents.includes(ChaosEvent.windGust)) {
-      if (this.windTimer <= 0 && Math.random() < 0.1) {
-        // 10% chance to start wind - VERY FREQUENT
-        this.windForce = (Math.random() - 0.5) * 150; // Random wind direction and strength - STRONGER
-        this.windTimer = 2.0 + Math.random() * 3; // 2-5 seconds of wind - LONGER
+      if (this.windTimer <= 0 && Math.random() < 0.01) {
+        // 1% chance to start wind - RARE
+        this.windForce = (Math.random() - 0.5) * 50; // REDUCED wind strength
+        this.windTimer = 1.0 + Math.random() * 1.5; // 1-2.5 seconds of wind - SHORTER
       }
       if (this.windTimer > 0) {
         this.windTimer -= dt;

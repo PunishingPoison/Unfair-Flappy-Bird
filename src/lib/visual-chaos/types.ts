@@ -35,27 +35,27 @@ export interface VisualChaosEventInstance {
  * Chaos probability configuration - MAXIMUM EXTREME
  */
 export const VISUAL_CHAOS_CONFIG = {
-  // Probability per pipe - MAXIMUM
-  singleEventChance: 0.98, // 98% - ALMOST CERTAIN
-  doubleEventChance: 0.9, // 90% - CONSTANT STACKING
-  tripleEventChance: 0.75, // 75% - VERY COMMON TRIPLE
-  quadEventChance: 0.4, // 40% - QUADRUPLE CHAOS
+  // Probability per pipe - REDUCED FROM EXTREME
+  singleEventChance: 0.3, // 30% - Occasional
+  doubleEventChance: 0.1, // 10% - Rare
+  tripleEventChance: 0.05, // 5% - Very Rare
+  quadEventChance: 0.0, // 0% - Disabled
 
-  // Duration range (ms) - EXTREMELY LONG AND PERSISTENT
-  minDuration: 1500,
-  maxDuration: 6000,
+  // Duration range (ms) - REDUCED
+  minDuration: 500,
+  maxDuration: 2000,
 
-  // Difficulty scaling - START MAXIMUM FROM BEGINNING
-  scoreThreshold: 1,
-  lowChanceMultiplier: 0.95, // 95% even at start - barely any mercy
+  // Difficulty scaling
+  scoreThreshold: 5,
+  lowChanceMultiplier: 0.5, // 50% chance below threshold
 
-  // Effect-specific settings - ABSOLUTE MAXIMUM
-  screenOffsetRange: { min: 60, max: 200 },
-  glitchSliceHeight: { min: 2, max: 80 },
-  staticNoiseDensity: 0.6,
-  flickerFrequency: 1, // Every frame
-  screenShakeIntensity: { min: 10, max: 30 },
-  screenShakeFrequency: 1 // Every frame
+  // Effect-specific settings - BALANCED
+  screenOffsetRange: { min: 20, max: 80 },
+  glitchSliceHeight: { min: 2, max: 20 },
+  staticNoiseDensity: 0.2,
+  flickerFrequency: 5, // Every 5th frame
+  screenShakeIntensity: { min: 5, max: 15 },
+  screenShakeFrequency: 3 // Every 3rd frame
 };
 
 /**
@@ -88,16 +88,16 @@ export function generateVisualChaosEvents(currentScore: number): VisualChaosEven
   const events: VisualChaosEventInstance[] = [];
   const now = Date.now();
 
-  // ABSOLUTE MAXIMUM visual chaos - 4-6 events every single time
+  // REDUCED visual chaos - generally 0-2 events
   const rand = Math.random();
-  let eventCount = 5; // Minimum 5 events
+  let eventCount = 1; // Default 1 event if triggered
 
-  if (rand < 0.5) {
-    eventCount = 7; // 50% chance of 7 events - ABSOLUTE MAXIMUM
-  } else if (rand < 0.8) {
-    eventCount = 6; // 30% chance of 6 events
+  if (rand < 0.1) {
+    eventCount = 2; // 10% chance of 2 events
   }
-  // 20% chance of 5 events
+
+  // Cap at 2 events max
+  eventCount = Math.min(eventCount, 2);
 
   // Generate events
   const availableEvents = [...ALL_VISUAL_EVENTS];
@@ -105,8 +105,8 @@ export function generateVisualChaosEvents(currentScore: number): VisualChaosEven
     const index = Math.floor(Math.random() * availableEvents.length);
     const type = availableEvents.splice(index, 1)[0];
 
-    // Long duration for persistent chaos
-    const durationMs = 1000 + Math.random() * 1500; // 1-2.5 seconds
+    // Shorter duration
+    const durationMs = 500 + Math.random() * 1000; // 0.5-1.5 seconds
 
     events.push({
       type,

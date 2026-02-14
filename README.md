@@ -12,10 +12,10 @@
 
 From the **very first second**, Unfair Flappy Bird assaults you with:
 
-- **30-40 simultaneous visual effects** making it nearly impossible to see
-- **4-7 chaos events on EVERY pipe** (no mercy, starting from pipe 0)
-- **95% chance of bird chaos** on every pipe pass
-- **35% of your button presses completely ignored**
+- **Balanced but chaotic visual effects** (30% chance per pipe)
+- **40% chance of pipe chaos** (starting from pipe 3)
+- **20% chance of bird chaos** (input lag, wind, etc.)
+- **5% chance of input lag** (down from 35%)
 - **Random gravity shifts, wind gusts, and sudden death drops**
 - **Invisible pipes, magnetic pulls, shrinking gaps, and fake pipes**
 
@@ -47,13 +47,13 @@ Every single frame, the game applies multiple visual disturbances:
 | **Extreme Contrast** | Blown out highlights/shadows          |
 | **Vignette**         | Dark edges closing in                 |
 
-**Frequency**: 5 batches added every frame × 5-7 effects per batch = **30-40 simultaneous effects**
+**Frequency**: Occasional bursts of 1-2 effects (rarely 3)
 
 ---
 
 ## 🏗️ Pipe Chaos (12 Types × 4-7 Per Pipe!)
 
-Every pipe spawns with **4-7 simultaneous chaos events**:
+Every pipe has a **40-60% chance** to spawn chaos events:
 
 ### Movement Chaos
 
@@ -88,7 +88,7 @@ Every pipe spawns with **4-7 simultaneous chaos events**:
 
 ## 🐦 Bird Chaos (7 Types, 95% Activation!)
 
-Every pipe pass has **95% chance** to activate:
+Every pipe pass has **20% chance** to activate:
 
 | Chaos             | Effect                   | Frequency        |
 | ----------------- | ------------------------ | ---------------- |
@@ -107,18 +107,18 @@ Every pipe pass has **95% chance** to activate:
 ### Chaos Frequency
 
 ```
-Visual Chaos:     5 batches/frame × 5-7 effects = 30-40 effects
-Pipe Chaos:       4-7 events per pipe (ALL pipes from 0)
-Bird Chaos:       95% activation per pipe pass
-Input Lag:        35% of presses ignored
-Sudden Drop:      15% chance per frame
+Visual Chaos:     30% chance per pipe (1-2 effects)
+Pipe Chaos:       40% chance per pipe (starts pipe 3)
+Bird Chaos:       20% activation per pipe pass
+Input Lag:        5% of presses ignored
+Sudden Drop:      0.5% chance per frame
 ```
 
 ### Trigger Timing (Impossible!)
 
 ```
-Late Trigger:     35 pixels before pipe
-Reaction Window:  <60ms (humanly impossible)
+Late Trigger:     100 pixels before pipe
+Reaction Window:  0.5s (difficult but possible)
 Snap Close:       80ms duration
 Min Gap:          5 pixels
 ```
@@ -126,9 +126,9 @@ Min Gap:          5 pixels
 ### Visual Effect Duration
 
 ```
-Min Duration:     1 second
-Max Duration:     2.5 seconds
-Overlap:          Constant (new added every frame)
+Min Duration:     0.5 second
+Max Duration:     2.0 seconds
+Overlap:          Maximum 2 simultaneous effects
 ```
 
 ---

@@ -40,26 +40,26 @@ export enum ChaosEvent {
  * EXTREME unfairness - nearly impossible to pass score 5
  */
 export const CHAOS_CONFIG = {
-  // Pipe chaos event counts - EXTREME
+  // Pipe chaos event counts - BALANCED
   eventProbabilities: [
-    { count: 0, chance: 0.0 }, // 0% chance of no events - ALWAYS chaos
+    { count: 0, chance: 0.4 }, // 40% chance of NO events - BREAKS
     { count: 1, chance: 0.4 }, // 40% chance of 1 event
-    { count: 2, chance: 0.75 }, // 75% chance of 2 events (35% extra)
-    { count: 3, chance: 0.5 }, // 50% chance of 3 events
-    { count: 4, chance: 0.25 } // 25% chance of 4 events - OVERLOAD
+    { count: 2, chance: 0.15 }, // 15% chance of 2 events
+    { count: 3, chance: 0.05 }, // 5% chance of 3 events
+    { count: 4, chance: 0.0 } // 0% chance of 4 events - REMOVED
   ],
 
-  // Bird chaos chance per pipe pass - MAXIMUM
-  birdChaosChance: 0.95, // 95% - ALMOST CERTAIN
+  // Bird chaos chance per pipe pass - REDUCED
+  birdChaosChance: 0.2, // 20% - Occasional
 
   // Late reaction windows (milliseconds before collision)
-  lateTriggerDistance: 35, // pixels - VIRTUALLY IMPOSSIBLE to react
-  maxActivationTime: 0.06, // seconds - <60ms, physically impossible for humans
+  lateTriggerDistance: 100, // pixels - Reactable
+  maxActivationTime: 0.5, // seconds - Reactable
 
-  // Difficulty escalation - START HARD IMMEDIATELY
-  minimalChaosPipes: 0, // Pipes start with chaos immediately
-  singleEventPipes: 1, // Only pipe 0 is easier
-  fullChaosStart: 1 // Pipe 1+: FULL CHAOS
+  // Difficulty escalation - GRADUAL
+  minimalChaosPipes: 3, // First 3 pipes are normal
+  singleEventPipes: 10, // Next 7 pipes have max 1 event
+  fullChaosStart: 20 // Full chaos after pipe 20
 };
 
 /**
@@ -97,19 +97,21 @@ export const BIRD_CHAOS_EVENTS = [
 export function generateChaosEvents(pipeIndex: number): ChaosEvent[] {
   const events: ChaosEvent[] = [];
 
-  // ALL PIPES: ABSOLUTE MAXIMUM CHAOS IMMEDIATELY - NO MERCY
+  // ALL PIPES: SCALED CHAOS
   const rand = Math.random();
-  let eventCount = 4; // Minimum 4 events from the very first pipe
+  let eventCount = 0; // Default 0 events
 
-  // Stack multiple events ABSOLUTE MAXIMUM
-  if (rand < 0.5) {
-    eventCount = 7; // 50% chance of 7 events - ABSOLUTE INSANITY
-  } else if (rand < 0.8) {
-    eventCount = 6; // 30% chance of 6 events
-  } else if (rand < 0.95) {
-    eventCount = 5; // 15% chance of 5 events
+  // Difficulty scaling
+  if (pipeIndex < CHAOS_CONFIG.minimalChaosPipes) {
+    return []; // No chaos for first few pipes
   }
-  // 5% chance of 4 events (minimum)
+
+  // Gradual difficulty curve
+  if (rand < 0.5) {
+    eventCount = 1; // 50% chance of 1 event
+  } else if (rand < 0.7 && pipeIndex > CHAOS_CONFIG.singleEventPipes) {
+    eventCount = 2; // 20% chance of 2 events (only after some pipes)
+  }
 
   // Select random unique events
   const availableEvents = [...PIPE_CHAOS_EVENTS];
@@ -140,8 +142,8 @@ export function generateBirdChaosEvents(): ChaosEvent[] {
  * RANDOM DISTRIBUTION - No patterns to exploit
  */
 export function getTrapType(pipeIndex: number): PipeType {
-  // Pipe 0 is normal (mercy)
-  if (pipeIndex === 0) return PipeType.normal;
+  // First few pipes are normal (mercy)
+  if (pipeIndex < CHAOS_CONFIG.minimalChaosPipes) return PipeType.normal;
 
   // Random trap assignment - no predictable patterns
   const rand = Math.random();
