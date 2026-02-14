@@ -11,7 +11,8 @@
     "start": "npm run dev",
     "prettier-format": "prettier --config .prettierrc \"./src\" \"./types\" --write",
     "prettier-format:md": "prettier --config .prettierrc \"./*.js\" --write",
-    "lint": "eslint ./src/**/*.ts"
+    "lint": "eslint ./src/**/*.ts",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/jxmked/Flappybird/issues"
   },
-  "homepage": "https://jxmked.github.io/Flappybird/",
+  "homepage": "https://PunishingPoison.github.io/Unfair-Flappy-Bird/",
   "devDependencies": {
     "@solid-primitives/raf": "^2.3.0",
     "@total-typescript/ts-reset": "^0.3.7",
