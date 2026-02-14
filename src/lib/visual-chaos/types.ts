@@ -53,9 +53,9 @@ export const VISUAL_CHAOS_CONFIG = {
   screenOffsetRange: { min: 20, max: 80 },
   glitchSliceHeight: { min: 2, max: 20 },
   staticNoiseDensity: 0.2,
-  flickerFrequency: 5, // Every 5th frame
-  screenShakeIntensity: { min: 5, max: 15 },
-  screenShakeFrequency: 3 // Every 3rd frame
+  flickerFrequency: 10, // Slower flicker
+  screenShakeIntensity: { min: 2, max: 5 }, // Very Light
+  screenShakeFrequency: 5 // Less frequent
 };
 
 /**
@@ -63,7 +63,7 @@ export const VISUAL_CHAOS_CONFIG = {
  */
 export const ALL_VISUAL_EVENTS = [
   VisualChaosEvent.blackout,
-  VisualChaosEvent.birdInvisible,
+  // VisualChaosEvent.birdInvisible, // REMOVED
   VisualChaosEvent.screenGlitch,
   VisualChaosEvent.screenOffset,
   VisualChaosEvent.flicker,

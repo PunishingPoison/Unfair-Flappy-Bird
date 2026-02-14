@@ -30,12 +30,11 @@ Every single frame, the game applies multiple visual disturbances:
 | Effect               | Description                           |
 | -------------------- | ------------------------------------- |
 | **Blackout**         | Screen covered in 85% black overlay   |
-| **Bird Invisible**   | Your bird completely vanishes         |
 | **Screen Glitch**    | Horizontal slices with RGB separation |
 | **Screen Offset**    | Game view shifts 60-300px randomly    |
 | **Flicker**          | Rapid white flashing                  |
 | **Static Noise**     | 30% of screen is TV static            |
-| **Screen Shake**     | Violent 60px shaking                  |
+| **Screen Shake**     | Light camera shake                    |
 | **Blur**             | Entire screen blurred (4px)           |
 | **Invert**           | Colors inverted (negative)            |
 | **Zoom**             | Screen zooms to 1.3x                  |
@@ -244,7 +243,6 @@ Tested on:
 These are **intentional**, not bugs:
 
 - Screen may induce headaches (flicker effect)
-- Bird may spontaneously disappear (invisible effect)
 - Controls may stop responding (input lag)
 - Gravity may change mid-flight (gravity shift)
 - Pipes may be invisible (invisible pipe)
