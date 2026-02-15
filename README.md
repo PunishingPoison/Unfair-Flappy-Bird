@@ -2,6 +2,9 @@
 
 **A chaotic, rage-inducing, and utterly unfair version of the classic Flappy Bird.**
 
+<img width="477" height="847" alt="image" src="https://github.com/user-attachments/assets/9f72755a-3fe6-4f42-8391-6dda2580a54a" />
+
+
 ⚠️ **WARNING: This game is designed to be brutally difficult and visually overwhelming. Play at your own risk!** ⚠️
 
 [![Play Now](https://img.shields.io/badge/Play-Now-red?style=for-the-badge)](https://jxmked.github.io/Flappybird/)
@@ -20,6 +23,8 @@ From the **very first second**, Unfair Flappy Bird assaults you with:
 - **Invisible pipes, magnetic pulls, shrinking gaps, and fake pipes**
 
 **Score 5 is a genuine achievement. Score 10 is legendary.**
+
+<img width="477" height="847" alt="image" src="https://github.com/user-attachments/assets/54be1d5d-79c3-4386-9a15-035b10e1b43e" />
 
 ---
 
@@ -47,6 +52,8 @@ Every single frame, the game applies multiple visual disturbances:
 | **Vignette**         | Dark edges closing in                 |
 
 **Frequency**: Occasional bursts of 1-2 effects (rarely 3)
+
+<img width="476" height="845" alt="image" src="https://github.com/user-attachments/assets/638a31a9-a953-4e4c-9ece-4f65a280ba7e" />
 
 ---
 
